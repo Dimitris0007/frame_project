@@ -1,5 +1,6 @@
 from PIL import Image, ImageOps
 from image_processing.image_processing import ImageProcessor
+import os
 
 
 # Main function
@@ -7,13 +8,16 @@ if __name__ == "__main__":
     # Create an instance of the ImageProcessor class
     image_processor = ImageProcessor()
 
-    image_name = input("Enter an image name: ")
-    
-    base_file_path = r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic\\' 
+    # Get the user input for the filename
+    user_input = input("Enter the filename (e.g., 'dimi.JPEG'): ")
 
-    full_file_path = base_file_path + image_name
+    # Define the 'pic' folder path manually with single backslashes
+    pic_folder = r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic'
 
-    #open image
+    # Combine the 'pic' folder path with the user input to create the full file path
+    full_file_path = os.path.join(pic_folder, user_input)
+
+    # Open the image using the full file path
     image = Image.open(full_file_path)
 
     # Process the image using the ImageProcessor instance
