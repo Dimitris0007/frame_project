@@ -1,22 +1,19 @@
 #!/usr/bin/python
-
-from PIL import Image, ImageOps, ImageFont
-from image_processing.image_processing import ImageProcessor
-import os
+# -*- coding:utf-8 -*-
 import sys
-import logging
+import os
 picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))), 'lib')
+libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
+import logging
 from waveshare_epd import epd5in65f
 import time
+from PIL import Image,ImageDraw,ImageFont
 import traceback
 
-picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-libdir = os.path.join('/home/pi/frame_project/', 'lib')
-
+from image_processing.image_processing import ImageProcessor
 
 # Main function
 if __name__ == "__main__":
