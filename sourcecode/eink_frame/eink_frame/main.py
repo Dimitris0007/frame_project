@@ -12,7 +12,7 @@ if __name__ == "__main__":
     user_input = input("Enter the filename (e.g., 'dimi.JPEG'): ")
 
     # Define the 'pic' folder path manually with single backslashes
-    pic_folder = r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic'
+    pic_folder = r'F:\home\pi\frame_project\pic'
 
     # Combine the 'pic' folder path with the user input to create the full file path
     full_file_path = os.path.join(pic_folder, user_input)
