@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9f1cd2b4-9f88-4ae6-9a20-27a1327d8708</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>eink_frame.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,18 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="eink_frame.py" />
+    <Compile Include="eink_display\eink_display.py" />
+    <Compile Include="eink_display\__init__.py" />
+    <Compile Include="image_processing\image_processing.py" />
+    <Compile Include="image_processing\__init__.py" />
+    <Compile Include="main.py" />
+    <Compile Include="photo_receiver\photo_receiver.py" />
+    <Compile Include="photo_receiver\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="image_processing\" />
+    <Folder Include="eink_display\" />
+    <Folder Include="photo_receiver\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

@@ -38,7 +38,7 @@ try:
     
     # Display the image
     logging.info("3.read bmp file")
-    Himage = Image.open(os.path.join(picdir, 'ballou.bmp'))
+    Himage = Image.open(os.path.join(picdir, 'new.bmp'))
     epd.display(epd.getbuffer(Himage))
 
     #go to sleep mode
