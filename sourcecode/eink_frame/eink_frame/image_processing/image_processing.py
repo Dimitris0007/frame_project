@@ -13,7 +13,7 @@ def floyd_steinberg_dithering(image, palette):
 
             quant_error = tuple(map(lambda a, b: a - b, old_pixel, new_pixel))
 
-            for dx, dy, factor in ((1, 0, 7/(215/10)), (-1, 1, 3/(215/10)), (0, 1, 5/(215/10)), (1, 1, 1/(215/10))):
+            for dx, dy, factor in ((1, 0, 7/(215/10)), (-1, 1, 2/(215/10)), (0, 1, 3/(215/10)), (1, 1, 1/(215/10))):
                 neighbor_x, neighbor_y = x + dx, y + dy
 
                 if 0 <= neighbor_x < width and 0 <= neighbor_y < height:
