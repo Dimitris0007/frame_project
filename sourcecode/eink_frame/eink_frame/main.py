@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 from image_processing.image_processing import ImageProcessor
 
 
@@ -8,7 +8,7 @@ if __name__ == "__main__":
     image_processor = ImageProcessor()
 
     #open image
-    image = Image.open(r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic\dimitri.jpg')
+    image = Image.open(r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic\dimi.JPEG')
 
     # Process the image using the ImageProcessor instance
     target_width = 600

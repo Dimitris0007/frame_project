@@ -1,10 +1,8 @@
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 def floyd_steinberg_dithering(image, palette):
-    # Create a copy of the original image
     dithered_image = image.copy()
-
     width, height = dithered_image.size
 
     for y in range(1, height - 1):
@@ -15,14 +13,16 @@ def floyd_steinberg_dithering(image, palette):
 
             quant_error = tuple(map(lambda a, b: a - b, old_pixel, new_pixel))
 
-            for dx, dy, factor in ((1, 0, 7/16), (-1, 1, 3/16), (0, 1, 5/16), (1, 1, 1/16)):
+            for dx, dy, factor in ((1, 0, 7/(215/10)), (-1, 1, 3/(215/10)), (0, 1, 5/(215/10)), (1, 1, 1/(215/10))):
                 neighbor_x, neighbor_y = x + dx, y + dy
-                neighbor_pixel = dithered_image.getpixel((neighbor_x, neighbor_y))
-                adjusted_pixel = tuple(
-                    int(neighbor_channel + quant_error_channel * factor)
-                    for neighbor_channel, quant_error_channel in zip(neighbor_pixel, quant_error)
-                )
-                dithered_image.putpixel((neighbor_x, neighbor_y), adjusted_pixel)
+
+                if 0 <= neighbor_x < width and 0 <= neighbor_y < height:
+                    neighbor_pixel = dithered_image.getpixel((neighbor_x, neighbor_y))
+                    adjusted_pixel = tuple(
+                        int(neighbor_channel + quant_error_channel * factor)
+                        for neighbor_channel, quant_error_channel in zip(neighbor_pixel, quant_error)
+                    )
+                    dithered_image.putpixel((neighbor_x, neighbor_y), adjusted_pixel)
 
     return dithered_image
 
@@ -48,15 +48,16 @@ class ImageProcessor:
         width, height = image.size
         aspect_ratio = width / height
 
-        # If the image is vertical, rotate it 90 degrees
         if aspect_ratio < 1:
-            image = image.rotate(90, expand=True)
+            image = image.rotate(90)
+            image = ImageOps.fit(image, (target_width, target_height))
 
-        # Resize the image while maintaining its aspect ratio
-        image.thumbnail((target_width, target_height))
+        # Resize the image using a recognized resampling filter (e.g., LANCZOS)
+        image = image.resize((target_width, target_height), Image.LANCZOS)
 
+            
         return image
-
+    
     def apply_dithering(self, image, palette):
         # Call the Floyd-Steinberg dithering function
         dithered_image = floyd_steinberg_dithering(image, palette)
