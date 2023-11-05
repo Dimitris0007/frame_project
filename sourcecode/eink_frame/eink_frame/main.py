@@ -8,7 +8,7 @@ if __name__ == "__main__":
     image_processor = ImageProcessor()
 
     #open image
-    image = Image.open(r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic\dimi.JPEG')
+    image = Image.open(r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic\dimitri.jpg')
 
     # Process the image using the ImageProcessor instance
     target_width = 600
