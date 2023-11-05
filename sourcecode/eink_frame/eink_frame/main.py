@@ -27,7 +27,7 @@ if __name__ == "__main__":
     pic_folder = r'/home/pi/frame_project/pic/'
 
     # Combine the 'pic' folder path with the user input to create the full file path
-    full_file_path = pic_folder + user_input
+    full_file_path = picdir + user_input
 
     # Open the image using the full file path
     image = Image.open(full_file_path)
