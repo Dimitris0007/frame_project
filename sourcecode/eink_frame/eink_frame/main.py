@@ -1,7 +1,14 @@
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageFont
 from image_processing.image_processing import ImageProcessor
 import os
+import sys
+import logging
+from waveshare_epd import epd5in65f
+import time
+import traceback
 
+picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
+libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
 
 # Main function
 if __name__ == "__main__":
@@ -26,4 +33,32 @@ if __name__ == "__main__":
     processed_image = image_processor.process_image(image, target_width, target_height)
 
 
+    logging.basicConfig(level=logging.DEBUG)
+    
+    try:
+        logging.info("epd5in65f Demo")
+    
+        #Initialize epd instance and clear screen
+        epd = epd5in65f.EPD()
 
+        logging.info("init and Clear")
+
+        epd.init()
+        epd.Clear()
+    
+        # Display the image
+        logging.info("3.read bmp file")
+        #Himage = Image.open(os.path.join(picdir, 'new.bmp'))
+        epd.display(epd.getbuffer(processed_image))
+
+        #go to sleep mode
+        logging.info("Goto Sleep...")
+        epd.sleep()
+    
+    except IOError as e:
+        logging.info(e)
+    
+    except KeyboardInterrupt:    
+        logging.info("ctrl + c:")
+        epd5in65f.epdconfig.module_exit()
+        exit()
