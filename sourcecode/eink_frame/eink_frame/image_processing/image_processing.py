@@ -44,10 +44,18 @@ class ImageProcessor:
         
 
     def resize_image(self, image, target_width, target_height):
-        # Resizing with original aspect ratio
+        # Check the aspect ratio of the image
+        width, height = image.size
+        aspect_ratio = width / height
+
+        # If the image is vertical, rotate it 90 degrees
+        if aspect_ratio < 1:
+            image = image.rotate(90, expand=True)
+
+        # Resize the image while maintaining its aspect ratio
         image.thumbnail((target_width, target_height))
-        
-        return image  # Return the resized image
+
+        return image
 
     def apply_dithering(self, image, palette):
         # Call the Floyd-Steinberg dithering function
@@ -57,9 +65,8 @@ class ImageProcessor:
     def process_image(self, image, target_width, target_height):
         # Resize and dither the image
         resized_image = self.resize_image(image, target_width, target_height)
-        dithered_image = self.apply_dithering(resized_image, self.palette)  # Pass the palette here
+        dithered_image = self.apply_dithering(resized_image, self.palette)
 
-        # Save the dithered image
         dithered_image.save(r'F:\EPAPERPROJ\frame_proj\e-Paper\RaspberryPi\python\pic\new.bmp', 'BMP')
 
         return dithered_image
